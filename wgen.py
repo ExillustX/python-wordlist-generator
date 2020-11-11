@@ -6,9 +6,9 @@ import argparse
 import itertools
 
 
-def createWordList(pre, chrs, min_length, max_length, output):
+def createWordList(prepend, chrs, min_length, max_length, output):
     """
-    :param `pre` is the string to prepend.
+    :param `prepend` is the string to prepend.
     :param `chrs` is characters to iterate.
     :param `min_length` is minimum length of characters.
     :param `max_length` is maximum length of characters.
@@ -29,7 +29,7 @@ def createWordList(pre, chrs, min_length, max_length, output):
     for n in range(min_length, max_length + 1):
         for xs in itertools.product(chrs, repeat=n):
             chars = ''.join(xs)
-            output.write(pre + "%s\n" % chars)
+            output.write(prepend + "%s\n" % chars)
             sys.stdout.write('\r[+] saving character `%s`' % chars)
             sys.stdout.flush()
     output.close()
