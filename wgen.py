@@ -43,7 +43,7 @@ if __name__ == '__main__':
         description='Python Wordlist Generator')
     parser.add_argument(
         '-pre', '--prepend',
-        default=None, help='string to prepend')
+        default='', help='string to prepend')
     parser.add_argument(
         '-chr', '--chars',
         default=None, help='characters to iterate')
