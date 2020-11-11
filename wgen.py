@@ -6,9 +6,10 @@ import argparse
 import itertools
 
 
-def createWordList(prepend, chrs, min_length, max_length, output):
+def createWordList(prepend, append, chrs, min_length, max_length, output):
     """
     :param `prepend` is the string to prepend.
+    :param `append` is the string to append.
     :param `chrs` is characters to iterate.
     :param `min_length` is minimum length of characters.
     :param `max_length` is maximum length of characters.
@@ -29,7 +30,7 @@ def createWordList(prepend, chrs, min_length, max_length, output):
     for n in range(min_length, max_length + 1):
         for xs in itertools.product(chrs, repeat=n):
             chars = ''.join(xs)
-            output.write(prepend + "%s\n" % chars)
+            output.write(''.join([prepend, chars, append, '\n']))
             sys.stdout.write('\r[+] saving character `%s`' % chars)
             sys.stdout.flush()
     output.close()
@@ -44,6 +45,9 @@ if __name__ == '__main__':
     parser.add_argument(
         '-pre', '--prepend',
         default='', help='string to prepend')
+    parser.add_argument(
+        '-appe', '--append',
+        default='', help='string to append')
     parser.add_argument(
         '-chr', '--chars',
         default=None, help='characters to iterate')
@@ -60,4 +64,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.chars is None:
         args.chars = string.printable.replace(' \t\n\r\x0b\x0c', '')
-    createWordList(args.prepend, args.chars, args.min_length, args.max_length, args.output)
+    createWordList(args.prepend, args.append, args.chars, args.min_length, args.max_length, args.output)
