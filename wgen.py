@@ -6,8 +6,9 @@ import argparse
 import itertools
 
 
-def createWordList(chrs, min_length, max_length, output):
+def createWordList(pre, chrs, min_length, max_length, output):
     """
+    :param `pre` is the string to prepend.
     :param `chrs` is characters to iterate.
     :param `min_length` is minimum length of characters.
     :param `max_length` is maximum length of characters.
@@ -28,7 +29,7 @@ def createWordList(chrs, min_length, max_length, output):
     for n in range(min_length, max_length + 1):
         for xs in itertools.product(chrs, repeat=n):
             chars = ''.join(xs)
-            output.write("%s\n" % chars)
+            output.write(pre + "%s\n" % chars)
             sys.stdout.write('\r[+] saving character `%s`' % chars)
             sys.stdout.flush()
     output.close()
@@ -40,6 +41,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter,
         description='Python Wordlist Generator')
+    parser.add_argument(
+        '-pre', '--prepend',
+        default=None, help='string to prepend')
     parser.add_argument(
         '-chr', '--chars',
         default=None, help='characters to iterate')
@@ -56,4 +60,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if args.chars is None:
         args.chars = string.printable.replace(' \t\n\r\x0b\x0c', '')
-    createWordList(args.chars, args.min_length, args.max_length, args.output)
+    createWordList(args.prepend, args.chars, args.min_length, args.max_length, args.output)

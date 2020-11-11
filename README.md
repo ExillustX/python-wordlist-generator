@@ -13,6 +13,8 @@ Python Wordlist Generator
 
 optional arguments:
   -h, --help            show this help message and exit
+  -pre PRETEXT, --prepend PRETEXT
+                        string to prepend
   -chr CHARS, --chars CHARS
                         characters to iterate
   -min MIN_LENGTH, --min_length MIN_LENGTH
@@ -26,11 +28,11 @@ optional arguments:
 ### Example
 
 ```
-$ python3 wgen.py -chr=abc -min=1 -max=4 -out=output/wordlist.txt
+$ python3 wgen.py -pre=pretext -chr=abc -min=1 -max=4 -out=output/wordlist.txt
 
 # or
 
-$ python3 wgen.py --chars=abc --min_length=1 --max_length=4 --output=output/wordlist.txt
+$ python3 wgen.py --prepend=pretext --chars=abc --min_length=1 --max_length=4 --output=output/wordlist.txt
 ```
 
 ### Disclaimer
